@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMToolkitCustomCtrl", "MV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DISample", "DISample\DISample.csproj", "{0F1F6825-3662-45DD-8029-D8301322BCB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewMvvmToolkitTest", "NewMvvmToolkitTest\NewMvvmToolkitTest.csproj", "{30E710E7-D3A3-4290-A467-A0D027F42A16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0F1F6825-3662-45DD-8029-D8301322BCB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F1F6825-3662-45DD-8029-D8301322BCB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F1F6825-3662-45DD-8029-D8301322BCB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E710E7-D3A3-4290-A467-A0D027F42A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E710E7-D3A3-4290-A467-A0D027F42A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E710E7-D3A3-4290-A467-A0D027F42A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E710E7-D3A3-4290-A467-A0D027F42A16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
