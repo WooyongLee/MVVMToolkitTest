@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
+using NewMvvmToolkitTest.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -50,6 +51,7 @@ namespace NewMvvmToolkitTest
             // 원하는 서비스를 전략에 맞는 수명 주기로 등록
             services.AddTransient<AnotherViewModel>();
             services.AddTransient<MainViewModel>();
+            services.AddTransient<OverlayControlViewModel>();
 
             return services.BuildServiceProvider();
         }

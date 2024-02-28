@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Messaging.Messages;
 using CommunityToolkit.Mvvm.Messaging;
 using NewMvvmToolkitTest.Model;
 using System;
+using CommunityToolkit.Mvvm.Input;
 
 namespace NewMvvmToolkitTest
 {
@@ -17,9 +18,25 @@ namespace NewMvvmToolkitTest
             get { return _receivedValue; }
             set { SetProperty(ref _receivedValue, value); }
         }
+
+        private bool _isUserControlVisible = false;
+
+        public bool IsUserControlVisible
+        {
+            get { return _isUserControlVisible; }
+            set { SetProperty(ref _isUserControlVisible, value); }
+        }
+
+        public RelayCommand ShowUserControlCommand { get; }
+
+
         public AnotherViewModel()
         {
             WeakReferenceMessenger.Default.Register<MyMessage>(this, OnMessageReceived);
+
+            ShowUserControlCommand = new RelayCommand(ShowOverlay);
+
+            WeakReferenceMessenger.Default.Register<MessageToHideUserControl>(this, OnHideOverlayUcMessageReceived);
 
             WeakReferenceMessenger.Default.Register<ValueChangedMessage<bool>>(this, (o, m) => OnStateChangedMessage(m));
 
@@ -28,13 +45,23 @@ namespace NewMvvmToolkitTest
             // WeakReferenceMessenger.Default.Register(this);
 
             // 2) 별도 Message Handler를 등록
-            WeakReferenceMessenger.Default.Register<ValueChangedMessage<string>>(this, HandleMessage);
+            WeakReferenceMessenger.Default.Register<ValueChangedMessage<string>, string>(this, "" ,HandleMessage);
 
         }
 
         private void OnMessageReceived(object recipient, MyMessage message)
         {
             ReceivedMessage = message.Content;
+        }
+
+        private void OnHideOverlayUcMessageReceived(object recipient, MessageToHideUserControl message)
+        {
+            IsUserControlVisible = false;
+        }
+
+        private void ShowOverlay()
+        {
+            IsUserControlVisible = true;
         }
 
 

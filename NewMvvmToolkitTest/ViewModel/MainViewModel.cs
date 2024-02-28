@@ -21,8 +21,11 @@ namespace NewMvvmToolkitTest
             ValueChangedMessage<bool> message = new ValueChangedMessage<bool>(_state);
             WeakReferenceMessenger.Default.Send(message);
         }
-
+        
         public RelayCommand SendMessageCommand { get; }
+
+        public RelayCommand ShowUserControlCommand { get; }
+
 
         [NotifyDataErrorInfo]
         private string msg;
@@ -35,9 +38,7 @@ namespace NewMvvmToolkitTest
         }
         // in view, <TextBox Text="{Binding Msg, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
-
         // INotifyPropertyChanged, ObservableObject, ObservableRecipient
-
 
         private ICommand _cmdMsg;
         public ICommand SendMsg
@@ -51,6 +52,12 @@ namespace NewMvvmToolkitTest
         public MainViewModel()
         {
             SendMessageCommand = new RelayCommand(SendMessage);
+            ShowUserControlCommand = new RelayCommand(ShowOverlay);
+        }
+
+        private void ShowOverlay()
+        {
+
         }
 
         private void SendMessage()
