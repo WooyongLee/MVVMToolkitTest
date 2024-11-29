@@ -4,12 +4,15 @@ using CommunityToolkit.Mvvm.Messaging;
 using NewMvvmToolkitTest.Model;
 using System;
 using CommunityToolkit.Mvvm.Input;
+using NewMvvmToolkitTest.Messenger;
 
 namespace NewMvvmToolkitTest
 {
     [INotifyPropertyChanged]
     public partial class AnotherViewModel : ObservableRecipient
     {
+        public readonly static string StrShowOverlay = "ShowOverlay";
+
         [ObservableProperty]
         private string _receivedValue;
 
@@ -47,6 +50,16 @@ namespace NewMvvmToolkitTest
             // 2) 별도 Message Handler를 등록
             WeakReferenceMessenger.Default.Register<ValueChangedMessage<string>, string>(this, "" ,HandleMessage);
 
+            // Messenger를 통해 MessageEvent를 구독
+            MyMessenger.Instance.Subscribe<MessageEvent>(OnMessageReceived);
+        }
+
+        private void OnMessageReceived(MessageEvent @event)
+        {
+            if (@event.Content == StrShowOverlay)
+            {
+                IsUserControlVisible = !IsUserControlVisible;
+            }
         }
 
         private void OnMessageReceived(object recipient, MyMessage message)

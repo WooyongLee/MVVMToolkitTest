@@ -7,8 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" 
-                Content="Back Button"
-                Command="{Binding HideUserControlCommand}"></Button>   
+        <StackPanel>
+            <Button Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" 
+                    Content="Back Button"
+                    Command="{Binding HideUserControlCommand}"></Button>
+
+            <TextBlock Text="{Binding OverlayText}"></TextBlock>    
+        </StackPanel>
     </Grid>
 </UserControl>

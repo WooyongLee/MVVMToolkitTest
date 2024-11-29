@@ -26,6 +26,16 @@
                 Content=" Show Overlay "
                 Command="{Binding ShowUserControlCommand}">
             </Button>
+
+            <StackPanel Width="100"
+			    HorizontalAlignment="Left">
+                    <TextBox Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+			     Margin="0 10"/>
+                <Button Height="40"
+			        Content="Login"
+			        Command="{Binding LoginCommand}"/>
+            </StackPanel>
+
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid x:Name="ReceivePanel" >

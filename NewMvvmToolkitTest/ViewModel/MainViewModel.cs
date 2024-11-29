@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.DependencyInjection;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using NewMvvmToolkitTest.Messenger;
 using NewMvvmToolkitTest.Model;
 using System;
 using System.ComponentModel;
@@ -53,17 +54,19 @@ namespace NewMvvmToolkitTest
         {
             SendMessageCommand = new RelayCommand(SendMessage);
             ShowUserControlCommand = new RelayCommand(ShowOverlay);
+
         }
 
         private void ShowOverlay()
         {
-
+            MyMessenger.Instance.Publish(new MessageEvent(AnotherViewModel.StrShowOverlay));
         }
 
         private void SendMessage()
         {
             var message = new MyMessage { Content = "Hello from SenderViewModel!" };
             Messenger.Send(message);
+
         }
     }
 }

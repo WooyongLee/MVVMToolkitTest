@@ -1,7 +1,10 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Mvvm.Messaging;
 using System;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MVVMToolkitTest
@@ -11,9 +14,12 @@ namespace MVVMToolkitTest
         public static int Count { get; set; }
 
         // Busy Test Command
-        public ICommand BusyTestCommand { get; set; }
+        public AsyncRelayCommand BusyTestCommand { get; set; }
         
         public ICommand LayerPopupCommand { get; set; }
+
+
+        
 
         private decimal _price;
 
@@ -48,14 +54,30 @@ namespace MVVMToolkitTest
         private void OnLayerPopupTest()
         {
             WeakReferenceMessenger.Default.Send(new LayerPopupMessage(true) { ControlName = "AboutControl" });
+
+            BusyTestCommand.Cancel();
         }
 
-        private async Task OnBusyTestAsync()
+        private async Task OnBusyTestAsync(CancellationToken cancellationToken)
         {
-            WeakReferenceMessenger.Default.Send(new BusyMessage(true) { BusyId = "OnBusyTestAsync" });
-            await Task.Delay(5000);
-            WeakReferenceMessenger.Default.Send(new BusyMessage(false) { BusyId = "OnBusyTestAsync" });
+            var currentMethodName = MethodBase.GetCurrentMethod().Name;
+
+            try
+            {
+                WeakReferenceMessenger.Default.Send(new BusyMessage(true) { BusyId = currentMethodName });
+                await Task.Delay(5000, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Busy Test Cancelled, " + e.ToString());
+            }
+            finally
+            {
+                WeakReferenceMessenger.Default.Send(new BusyMessage(false) { BusyId = currentMethodName });
+            }
+
         }
+
 
         public override void OnNavigating(object sender, object navigationEventArgs)
         {
